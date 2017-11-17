@@ -15,16 +15,34 @@
 // ele aloca o valor no var e conta até 5 conforme diz o for
 // Em typescript, assim como em ES6, seguindo a logica do POO
 // eu posso alocar esse valor usando o let.
-function doSomething() {
-
-    // Ao transformar o TS em JS pelo terminal
-    // Eu recebo a mensagem de que há um erro por causa do let
-    // Mesmo assim ele transforma e já traz o let em var, conforme abaixo
-    for (var i = 0; i < 5; i++) {
-        console.log(i);
-    }
-    console.log('Finally: ' + i);
-    // Repare o erro que ele sublinha no i
-    // Ele perde a referencia.
-}
-doSomething();
+// function doSomething() {
+//     for (let i = 0; i < 5; i++) {
+//         console.log(i);     
+//     }
+//     console.log('Finally: ' + i);
+//     // Repare o erro que ele sublinha no i
+//     // Ele perde a referencia.
+// }
+// doSomething();
+////////////////////////////////
+// enum typescript
+//  
+var a;
+var b;
+var c;
+var d;
+var e = [1, 2, 3];
+var f = [1, true, 'a', false];
+var ColorRed = 0;
+var ColorGreen = 1;
+var ColorBlue = 2;
+// enum Color {Red, Green, Blue}; =
+var Color;
+(function (Color) {
+    Color[Color["Red"] = 0] = "Red";
+    Color[Color["Green"] = 1] = "Green";
+    Color[Color["Blue"] = 2] = "Blue";
+    Color[Color["Purple"] = 3] = "Purple";
+})(Color || (Color = {}));
+;
+var backgroundColor = Color.Red;
