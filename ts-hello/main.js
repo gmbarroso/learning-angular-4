@@ -27,6 +27,9 @@
 ////////////////////////////////
 // enum typescript
 //  
+
+// Em javaScript essas vairaveis simplesmente são definidas como var
+// E um enum se transformou em em uma função
 var a;
 var b;
 var c;

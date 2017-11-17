@@ -41,6 +41,7 @@
 // let count = 5;
 // count = 3;
 
+// Definindo o que serão as variáveis
 let a: number;
 let b: boolean;
 let c: string;
