@@ -57,82 +57,131 @@ import { Component } from '@angular/core';
             <button (click)="onSave($event)">Teste 2</button>
         </div>
 
+        <br>
+
         <!-- <input (keyup)="onKeyUp($event)"/> -->
         <!-- <input (keyup.enter)="onKeyUp()"/> -->
         <!-- <input #email (keyup.enter)="onKeyUp(email.value)"/> -->
         <!-- Two way Biding -->
         <!-- <input [value]="email" (keyup.enter)="email = $event.target.value; onKeyUp()"/> -->
         <input [(ngModel)]="email" (keyup.enter)="onKeyUp()"/>
+        <br>
+
+        <!-- PIPES 
+        Para todos os formatos PIPE
+        Acessar angular.io e digitar no search datepipe-->    
+        {{course.title | uppercase }}<br/>
+        {{course.students | number}}<br/>
+        {{course.rating | number:'2.1-1'}}<br/>
+        {{course.price | currency:'AUD':true:'3.2-2'}}<br/>
+        {{course.releaseDate | date:'shortDate'}}<br/><br>
+
+        {{text | summary: 10}}
+
+        <br>
+        <br>
+
+        <button (click)="isFavorite()"> Like </button>
+        <span class="glyphicon glyphicon-star {{colorClass}}"></span>
+
+        <span class="glyphicon glyphicon-star-empty {{colorClass}}"></span>
+        
+
         `    
 })
 
 // Criando a classe e colocando export para o Angular acessar essa classe
 export class CoursesComponent {
-    //Adicionando um field no app para alocar o title dessa página
-    //Em angular, eu vou recuperar esse tittle utilizando {{ }}
+    colorClass = "star-black";
+    starFlag = true;
+    // //Adicionando um field no app para alocar o title dessa página
+    // //Em angular, eu vou recuperar esse tittle utilizando {{ }}
     title = "List of courses";
 
-    // getTitle(){
-    //     return this.title;
-    // }
+    // // getTitle(){
+    // //     return this.title;
+    // // }
     
-    //Services
-    // No mundo real, esses courses viriam de um servidor, de um endereço
-    // http endpoint onde os dados ficam alocados
-    // Logica para chamar um serviço HTTP 
-    // modificando a lista de courses e buscando ela do courses.service.ts
-    // courses = ["course1", "course2", "course3"];
-    courses;
+    // //Services
+    // // No mundo real, esses courses viriam de um servidor, de um endereço
+    // // http endpoint onde os dados ficam alocados
+    // // Logica para chamar um serviço HTTP 
+    // // modificando a lista de courses e buscando ela do courses.service.ts
+    // // courses = ["course1", "course2", "course3"];
+    // courses;
 
-    // Dependency Injection
-    // Significa injetar ou providenciar as dependencias de uma classe 
-    // dentro do seu construtor
-    // abrindo um constructor onde eu crio meus objetos
-    constructor(service: CoursesService) {
-        // Aqui eu direciono para que a lista de cursos venha do Servidor
-        // Porém, dessa maneira eu terei sempre que dizer, em diferentes
-        // lugares que eu quiser a lista de cursos, recuperar do servidor
-        // Um maneira mais inteligente de fazer isso é colocando o objeto
-        // abaixo como um parâmetro, como uma dependencia injetada.
-        // let service = new CoursesService();
-        this.courses = service.getCourses();
-    }
+    // // Dependency Injection
+    // // Significa injetar ou providenciar as dependencias de uma classe 
+    // // dentro do seu construtor
+    // // abrindo um constructor onde eu crio meus objetos
+    // constructor(service: CoursesService) {
+    //     // Aqui eu direciono para que a lista de cursos venha do Servidor
+    //     // Porém, dessa maneira eu terei sempre que dizer, em diferentes
+    //     // lugares que eu quiser a lista de cursos, recuperar do servidor
+    //     // Um maneira mais inteligente de fazer isso é colocando o objeto
+    //     // abaixo como um parâmetro, como uma dependencia injetada.
+    //     // let service = new CoursesService();
+    //     this.courses = service.getCourses();
+    // }
 
-    //Class Binding
-    //Adicionando classes ao meu HTML dinamicamente baseado em sua 
-    //condição
+    // //Class Binding
+    // //Adicionando classes ao meu HTML dinamicamente baseado em sua 
+    // //condição
     isActive = false;
 
-    //Evvent Biding
+    // //Evvent Biding
     onSave($event){
         $event.stopPropagation();
         console.log("Pare de clicar em mim", $event);
     }
 
-    //Event Bubbling
+    // //Event Bubbling
     onDivClicked(){
         console.log("Div was clicked");
     }
 
-    //Event Filtering
-    // onKeyUp($event){
-    //     if ($event.keyCode === 13) console.log ("ENTER was pressed");
-    // }
-    // onKeyUp(){
-    //     console.log ("ENTER was pressed");
-    // }
+    // //Event Filtering
+    // // onKeyUp($event){
+    // //     if ($event.keyCode === 13) console.log ("ENTER was pressed");
+    // // }
+    // // onKeyUp(){
+    // //     console.log ("ENTER was pressed");
+    // // }
 
-    //Template Variable
-    //criando variável email no html com #
-    // onKeyUp(email) {
-    //     console.log(email);
-    // }
+    // //Template Variable
+    // //criando variável email no html com #
+    // // onKeyUp(email) {
+    // //     console.log(email);
+    // // }
 
-    //Two way biding
+    // //Two way biding
     email = "barroso.guilherme@gmail.com";
 
     onKeyUp() {
         console.log(this.email);
     }
 
+    course = {
+        title: "The Complete Angular Course",
+        rating: 4.9745,
+        students: 30123,
+        price: 190.95,
+        releaseDate: new Date(2016, 3, 1)
+    }
+
+    //Custom Pipes
+    //Aplicando um resumo a um texto longo.
+    //Um aruivo novo foi adicionado - summary.pipe.ts
+    text = "I've seen things you people wouldn't believe. Attack ships on fire in shoulder of Orion. All those moments will be lost like tears in rain. Time to die."
+
+    isFavorite(){
+        if(this.starFlag){
+           console.log("it worked");
+           this.colorClass = "star-yellow";
+           this.starFlag = false;
+        } else {
+            this.colorClass = "star-black";
+            this.starFlag = true;
+        }
+    }
 }

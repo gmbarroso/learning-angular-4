@@ -4,3 +4,11 @@
 body {
     margin-left: 20px;
 }
+
+.star-black {
+    color: black  !important;
+}
+
+.star-yellow {
+    color: blue !important;
+}
