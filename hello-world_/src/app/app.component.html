@@ -101,4 +101,16 @@ mesmo os dois estando no template -->
     </li>
 </ul>
 
+<br>
+<br>
+
+<button (click) = "loadCourses()">Load Courses</button>
+<ul>
+    <!-- fazer o angular traçar o objeto pelo id e não pela identidade -->
+    <li *ngFor = "let course of courses; trackBy: trackCourse">
+        {{course.name}}
+
+    </li>
+</ul>
+
 
