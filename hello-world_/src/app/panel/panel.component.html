@@ -1,0 +1,15 @@
+
+
+<!-- ngContent -->
+<!-- Um evento de duas vias para alterar o dom e comunicar o ts com o template
+ou dois templates entre si -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <!-- <ng-content select = ".heading"></ng-content> -->
+    <div class="heading">Heading</div>
+    
+  </div>
+  <div class="panel-body">
+    <ng-content select = ".body"></ng-content>
+  </div>
+</div>

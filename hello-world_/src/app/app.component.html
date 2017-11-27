@@ -1,7 +1,104 @@
-<h1>Angular</h1>
+<h1>Hello World </h1>
 <courses></courses>
 
 <br>
 <br>
 
-<favorite></favorite>
+<!-- Isso aqui, do jeito que está abaixo não irá funcionar -->
+<!-- Mesmo que esteja definido is Favorite no meu component, o console continua
+retornando erro porque esse isFavorite não está como um input   
+O mesmo serve para o change. O change não está como um output
+Não podemos usar propriedade ou event biding aqui -->
+
+<!-- $event é um parametro padrão do angular para saber que algo aconteceu com 
+Aquele evento, Estou passando dado para cá-->
+<favorite [isFavorite] = "post.isFavorite" (change) = "onFavoriteChange($event)" ></favorite>
+<!-- Agora sim: -->
+
+<br>
+<br>
+<!-- 
+
+<img [src] = "imageUrl" />
+<button (click) = "onClick()"></button> -->
+
+<br>
+<br>
+
+<bootstrap-panel>
+    <ng-container class="heading">Heading</ng-container>
+    <div class="body">
+        <h2>Body</h2>
+        <p>Some content...</p>
+    </div>
+</bootstrap-panel>
+
+<br>
+<br>
+
+<like [likesCount] = "tweet.likesCount" 
+            [isActive] = "tweet.isLiked"></like>
+
+            <br>
+            <br>
+
+<!-- Diretivas
+Usamos diretivas para alterar o DOM -->
+<!-- <div *ngIf = 'courses.length > 0'>
+    <h1>List of courses</h1>
+</div> -->
+
+<!-- Se a condição for verdadeira ele vai adicionar ou recmover o div    
+mesmo os dois estando no template -->
+<!-- <div *ngIf = 'courses.length == 0' >
+    <h1>No courses yet</h1>
+</div> -->
+
+<!-- Uma maneira mais limpda de colocar o ngIf -->
+<!-- <div *ngIf = "courses.length > 0; then coursesList else noCourses" ></div> -->
+<!-- primeiro a condição; se for verdadeira, then primeira condição, se não else segunda condição -->
+<!-- <ng-template #coursesList>
+    List of courses
+</ng-template>
+<ng-template #noCourses>
+    No courses yet
+</ng-template> -->
+
+<!-- Outra maneira de show/hide div -->
+<div [hidden] = "courses.length == 0">
+    List of courses
+</div>
+<div [hidden] = "courses.length > 0" >
+    No courses yet
+</div>
+
+<br>
+<br>
+
+<!-- ngSwitchCase -->
+<!-- Também para add or remotve -->
+<ul class="nav nav-pills">  
+    <li [class.active] = "viewMode == 'map'"><a (click) = "viewMode = 'map'" href="">Map View</a></li>
+    <li [class.active] = "viewMode == 'list'"><a (click) = "viewMode = 'list'" href="">List View</a></li>
+</ul>
+<div [ngSwitch] = "viewMode">
+    <!-- "" porque é o valor dessa diretiva e '' que é o valor dessa diretiva, uma string -->
+    <div *ngSwitchCase = "'map'">Map View Content</div>
+    <div *ngSwitchCase = "'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<br>
+<br>
+<!-- ngFor and change detection -->
+<button (click) = "onAdd()">Add</button>
+<ul>
+    <li *ngFor = "let course of courses; index as i; even as isEven">
+        {{i}} - 
+        {{course.name}} <span *ngIf = "isEven">(EVEN)</span>
+        <!-- <button (click) = "onRemove(course)">Remove</button> -->
+        <button (click) = "onChange(course)">Remove</button>
+    </li>
+</ul>
+
+

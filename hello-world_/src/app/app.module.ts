@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.component';
 import { CourseComponent } from './course/course.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { PanelComponent } from './panel/panel.component';
+import { LikeComponent } from './like/like.component';
 
 
 @NgModule({
@@ -25,7 +27,11 @@ import { FavoriteComponent } from './favorite/favorite.component';
     //Adicionando aqui inclusive os componentes de Pipe
     SummaryPipe,
 
-    FavoriteComponent
+    FavoriteComponent,
+
+    PanelComponent,
+
+    LikeComponent
   ],
   imports: [
     BrowserModule,

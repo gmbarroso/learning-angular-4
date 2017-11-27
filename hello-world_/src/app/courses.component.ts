@@ -32,8 +32,7 @@ import { Component } from '@angular/core';
         Nesse caso eu criei uma variável course para alocar os
         diferentes courses da minha array courses
         
-        Diretivas manipulam o DOM
-        -->
+        Diretivas manipulam o DOM -->
 
             <li *ngFor = "let course of courses">
                 {{ course }}
@@ -72,9 +71,9 @@ import { Component } from '@angular/core';
         Acessar angular.io e digitar no search datepipe-->    
         {{course.title | uppercase }}<br/>
         {{course.students | number}}<br/>
-        {{course.rating | number:'2.1-1'}}<br/>
+        {{course.rating | number:'1.2-2'}}<br/>
         {{course.price | currency:'AUD':true:'3.2-2'}}<br/>
-        {{course.releaseDate | date:'shortDate'}}<br/><br>
+        {{course.releaseDate | date:'dd/MM/yyyy'}}<br/><br>
 
         {{text | summary: 10}}
 
@@ -108,21 +107,21 @@ export class CoursesComponent {
     // // Logica para chamar um serviço HTTP 
     // // modificando a lista de courses e buscando ela do courses.service.ts
     // // courses = ["course1", "course2", "course3"];
-    // courses;
+    courses;
 
     // // Dependency Injection
     // // Significa injetar ou providenciar as dependencias de uma classe 
     // // dentro do seu construtor
     // // abrindo um constructor onde eu crio meus objetos
-    // constructor(service: CoursesService) {
+    constructor(service: CoursesService) {
     //     // Aqui eu direciono para que a lista de cursos venha do Servidor
     //     // Porém, dessa maneira eu terei sempre que dizer, em diferentes
     //     // lugares que eu quiser a lista de cursos, recuperar do servidor
     //     // Um maneira mais inteligente de fazer isso é colocando o objeto
     //     // abaixo como um parâmetro, como uma dependencia injetada.
-    //     // let service = new CoursesService();
-    //     this.courses = service.getCourses();
-    // }
+    // let service = new CoursesService();
+        this.courses = service.getCourses();
+    }
 
     // //Class Binding
     // //Adicionando classes ao meu HTML dinamicamente baseado em sua 
