@@ -1,0 +1,80 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div ngModelGroup="contact" #contact="ngModelGroup">
+    <div *ngIf="!contact.valid" >...</div>
+      <div class="form-group">
+          <!-- for com o id de mesmo nome, quando o usuario clicar no id
+          ele automaticamente já acessa o input -->
+          <label for="firstName">First Name</label>
+          <!-- ngmodel = bana in a box -->
+          <!-- change = evento -->
+          <!-- #firstname template variabel -->
+          <input 
+          required minlength="3" 
+          maxlength="10" 
+          pattern="banana" 
+          ngModel name="firstName" 
+          #firstName="ngModel" (change)="log(firstName)" 
+          id="firstName" 
+          type="text" 
+          class="from-control">
+          <!-- validation error and multi validation errors-->
+          <div 
+          class="alert alert-danger" 
+          *ngIf="firstName.touched && !firstName.valid" >
+            <div *ngIf="firstName.errors.required">
+              First Name is required.
+            </div>
+            <div *ngIf="firstName.errors.minlength">
+              First name should minimum {{ firstName.errors.minlength.requiredLength }} characters
+            </div>
+            <div *ngIf="firstName.errors.pattern">
+            First name dosen't mach the pattern.
+          </div>
+          </div>
+        </div>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">
+      Comment
+    </label>
+    <textarea 
+    name="" 
+    ngModel name ="comment" 
+    id="comment" 
+    cols="30" 
+    rows="10" 
+    class="form-control">  </textarea>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ngModel name="isSubscribe" >Subscribe to mailing list
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="contactMethod"></label>
+    <!-- multiple ngModel -->
+    <select ngModel name="contactMethod" id="contactMethod" class="form-control">
+      <option value=""></option>
+      <!-- ngValue é uma diretiva que expoe o objeto valor
+      faz de string para numero -->
+      <option *ngFor="let method of contactMethods" [value]="method.id">{{ method.name }}</option>
+    </select>
+  </div>
+  <div *ngFor="let method of contactMethods" class="radio">
+    <label>
+      <!-- nesse caso os ngModels já estão com o nome definido -->
+      <!-- [value property biding] -->
+      <input ngModel type="radio" name="contactMethod" [value]="method.id">
+      {{ method.name }}
+    </label>
+  </div>
+  <p>
+    {{ f.value | json }}
+  </p>
+
+  <!-- disabled para somente acionar quando eu colocar um valor aceitável -->
+  <button class="btn btn-primary" [disabled]="!f.valid" >
+    Submit
+  </button>
+</form>

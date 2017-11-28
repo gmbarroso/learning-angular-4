@@ -44,9 +44,19 @@ Aquele evento, Estou passando dado para cá-->
 
 <!-- Diretivas
 Usamos diretivas para alterar o DOM -->
-<!-- <div *ngIf = 'courses.length > 0'>
+<div *ngIf = 'courses.length > 0; else noCourses'>
     <h1>List of courses</h1>
-</div> -->
+</div>
+
+<!-- Uma outra forma de escrever o ngIf -->
+<!-- <ng-template [ngIf] = "courses.length > 0" >
+    <div>
+        List of courses
+    </div>
+</ng-template>
+<ng-template [ngIf] = "!(courses.length > 0)" >
+    No courses
+</ng-template> -->
 
 <!-- Se a condição for verdadeira ele vai adicionar ou recmover o div    
 mesmo os dois estando no template -->
@@ -65,27 +75,28 @@ mesmo os dois estando no template -->
 </ng-template> -->
 
 <!-- Outra maneira de show/hide div -->
-<div [hidden] = "courses.length == 0">
+<!-- <div [hidden] = "courses.length == 0">
     List of courses
 </div>
 <div [hidden] = "courses.length > 0" >
     No courses yet
-</div>
+</div> -->
 
 <br>
 <br>
+
 
 <!-- ngSwitchCase -->
 <!-- Também para add or remotve -->
 <ul class="nav nav-pills">  
-    <li [class.active] = "viewMode == 'map'"><a (click) = "viewMode = 'map'" href="">Map View</a></li>
-    <li [class.active] = "viewMode == 'list'"><a (click) = "viewMode = 'list'" href="">List View</a></li>
+    <!-- <li [class.active] = "viewMode == 'map'"><a (click) = "viewMode = 'map'" href="">Map View</a></li>
+    <li [class.active] = "viewMode == 'list'"><a (click) = "viewMode = 'list'" href="">List View</a></li> -->
 </ul>
 <div [ngSwitch] = "viewMode">
     <!-- "" porque é o valor dessa diretiva e '' que é o valor dessa diretiva, uma string -->
-    <div *ngSwitchCase = "'map'">Map View Content</div>
+    <!-- <div *ngSwitchCase = "'map'">Map View Content</div>
     <div *ngSwitchCase = "'list'">List View Content</div>
-    <div *ngSwitchDefault>Otherwise</div>
+    <div *ngSwitchDefault>Otherwise</div> -->
 </div>
 
 <br>
@@ -93,12 +104,12 @@ mesmo os dois estando no template -->
 <!-- ngFor and change detection -->
 <button (click) = "onAdd()">Add</button>
 <ul>
-    <li *ngFor = "let course of courses; index as i; even as isEven">
+    <!-- <li *ngFor = "let course of courses; index as i; even as isEven">
         {{i}} - 
-        {{course.name}} <span *ngIf = "isEven">(EVEN)</span>
+        {{course.name}} <span *ngIf = "isEven">(EVEN)</span> -->
         <!-- <button (click) = "onRemove(course)">Remove</button> -->
-        <button (click) = "onChange(course)">Remove</button>
-    </li>
+        <!-- <button (click) = "onChange(course)">Remove</button> -->
+    <!-- </li> -->
 </ul>
 
 <br>
@@ -107,10 +118,49 @@ mesmo os dois estando no template -->
 <button (click) = "loadCourses()">Load Courses</button>
 <ul>
     <!-- fazer o angular traçar o objeto pelo id e não pela identidade -->
-    <li *ngFor = "let course of courses; trackBy: trackCourse">
+    <!-- <li *ngFor = "let course of courses; trackBy: trackCourse">
         {{course.name}}
 
-    </li>
+    </li> -->
 </ul>
 
+<br>
+<br>
+
+<button
+    [style.backgroundColor] = "canSave ? 'blue': 'gray'"
+    [style.color] = "canSave ? 'white': 'black'"
+    [style.fontWeight] = "canSave ? 'bold': 'normal'"
+>
+Save
+</button>
+
+<br>
+<br>
+
+<!-- Safe traversal Operator -->
+<!-- <span *ngIf="task.assignee">{{task.assignee.name}}</span> -->
+<span>{{task.assignee?.name}}</span>
+
+<br>
+<br>
+
+<!-- é bom ter a flexibilidade para dizer a diretiva o formato que quero -->
+<input type="text" [appInputFormat]="'uppercase'">
+
+<br>
+<br>
+
+<!-- Definindo o Component API -->
+<zippy title = "Shipping Details">
+    Shipping Details Content
+</zippy>
+<zippy title = "Billing Details">
+    Billing Details Content
+</zippy>
+
+<br>
+<br>
+
+<contact-form></contact-form>
 
