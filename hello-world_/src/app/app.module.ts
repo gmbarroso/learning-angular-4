@@ -1,3 +1,5 @@
+import { PostService } from './services/post.service';
+import { HttpModule } from '@angular/http';
 import { SummaryPipe } from './summary.pipe';
 import { CoursesService } from './course/courses.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +18,7 @@ import { LikeComponent } from './like/like.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { PostsComponent } from './posts/posts.component';
 
 
 @NgModule({
@@ -29,30 +32,26 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 
     //Adicionando aqui inclusive os componentes de Pipe
     SummaryPipe,
-
     FavoriteComponent,
-
     PanelComponent,
-
     LikeComponent,
-
     InputFormatDirective,
-
     ZippyComponent,
-
     ContactFormComponent,
-
-    
+    PostsComponent,    
   ],
+
   imports: [
     BrowserModule,
-
     //Two way biding
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   // Toda Dependencia eu coloco aqui no provider
   providers: [
-    CoursesService
+    CoursesService,
+
+    PostService
   ],
   bootstrap: [AppComponent]
 })
